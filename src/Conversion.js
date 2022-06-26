@@ -1,10 +1,15 @@
 class Conversion {
   #R = [];
+
   #G = [];
+
   #B = [];
+
   #A = [];
+
   #imageLayer = null;
-  #image = [];  
+
+  #image = [];
 
   constructor(canvas, rgbaData, xSide, ySide) {
     this.rgba = rgbaData;
@@ -14,16 +19,18 @@ class Conversion {
   }
 
   #createImageLayer() {
-    this.#imageLayer = this.canvas.getContext("2d");
+    this.#imageLayer = this.canvas.getContext('2d');
     this.#image = this.#imageLayer.createImageData(this.xSide, this.ySide);
   }
 
   #decomposition() {
+    let count = 0;
     for (let i = 0; i < this.rgba.length; i += 4) {
-      this.#R.push(this.rgba[i + 0]);
-      this.#G.push(this.rgba[i + 1]);
-      this.#B.push(this.rgba[i + 2]);
-      this.#A.push(this.rgba[i + 3]);
+      this.#R[count] = this.rgba[i + 0];
+      this.#G[count] = this.rgba[i + 1];
+      this.#B[count] = this.rgba[i + 2];
+      this.#A[count] = this.rgba[i + 3];
+      count += 1;
     }
   }
 
@@ -36,7 +43,7 @@ class Conversion {
       this.#image.data[i + 1] = this.#G[count];
       this.#image.data[i + 2] = this.#B[count];
       this.#image.data[i + 3] = this.#A[count];
-      count++;
+      count += 1;
     }
     this.#imageLayer.putImageData(this.#image, xPos, yPos);
   }

@@ -1,0 +1,78 @@
+:root {
+    --font: 'Roboto', sans-serif;
+    --color-sink: rgb(0, 0, 0);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-attachment: fixed;
+}
+
+#canvas1
+{
+    position: absolute; 
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
+
+
+.container
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+    /* position: absolute;
+    top: 50%;
+    left: 50%; */
+}
+
+.text
+{
+    font-family: 'AlfaSlabOne';
+    font-weight: 100;
+    font-size: 28px;
+    color: #000000;
+}
+
+
+
+.dud
+{
+    /* color: #757575; */
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    height: 50px;
+}
+
+.textfooter
+{
+    display: flex;
+    font-weight: 300;
+    justify-content: center;
+    font-size: 20px;
+    text-decoration: none;
+    color: var(--color-sink);
+    font-family: var(--font)   
+}
+
+.rsschool
+{
+    height: 30px;
+}
+
+.content{
+    
+    width: 160px;
+}

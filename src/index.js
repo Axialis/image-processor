@@ -1,17 +1,29 @@
-const brain = require('brain.js'); 
+import Dispersion from './Dispersion';
+import Conversion from './Conversion';
+import Convolution from './Convolution';
+import './style.css';
 
-const net = new brain.NeuralNetwork();
+const canvas = document.getElementById('canvas1');
+canvas.width = 1000;
+canvas.heigth = 500;
+const ctx = canvas.getContext('2d');
 
-net.train([
-    {input: [0,0], output: [0]},
-    {input: [0,1], output: [1]},
-    {input: [1,0], output: [1]},
-    {input: [1,1], output: [0]},
-]);
+const image = new Image();
+image.src = './assets/img/crab.jpg';
 
-console.log(net.run([0, 1]));
+const X = 200;
+const Y = 200;
 
-const value = document.createElement('h1');
-value.innerHTML = net.run([0, 1]);
-document.body.append(value);
-
+image.onload = function () {
+  ctx.drawImage(image, 0, 0, X, Y);
+  const RGBA = ctx.getImageData(0, 0, X, Y).data;
+  const layer = new Dispersion(canvas, RGBA, X, Y);
+  const second = new Conversion(canvas, RGBA, X, Y);
+  const conv = new Convolution(layer.getBlueData(), X, Y);
+  conv.run();
+  second.rgbaToImage(0, 220);
+  layer.addLayer('Red', 220, 0);
+  layer.addLayer('Green', 440, 0);
+  layer.addLayer('Blue', 660, 0);
+  layer.addLayer('Alpha', 0, 440);
+};

@@ -1,7 +1,15 @@
 class Convolution {
-  #rectMatrix = [[], []];
+  #rectMatrix = [];
 
-  #coreMatrix = [[1, 0, 1], [0, 1, 0], [1, 0, 1]];
+  #generateMatrix = [];
+
+  #coreMatrix = [
+    [-1, 0, -1],
+    [0, 5, 0],
+    [-1, 0, -1],
+  ];
+
+  #outputMatrix = [];
 
   constructor(layer, xSide, ySide) {
     this.layer = layer;
@@ -12,8 +20,9 @@ class Convolution {
   #createRectMatrix() {
     let count = 0;
     for (let i = 0; i < this.xSide; i += 1) {
+      this.#rectMatrix[i] = [];
       for (let k = 0; k < this.ySide; k += 1) {
-        this.#rectMatrix[[i][k]] = this.layer[count];
+        this.#rectMatrix[i][k] = this.layer[count];
         count += 1;
       }
     }
@@ -21,6 +30,33 @@ class Convolution {
 
   run() {
     this.#createRectMatrix();
+  }
+
+  generate() {
+    this.#createRectMatrix();
+    let data = 0;
+    let countX = 0;
+    let countY = 0;
+    for (let y = 2; y < this.#rectMatrix.length; y += 1) {
+      this.#generateMatrix[countY] = [];
+      for (let x = 0; x < this.#rectMatrix[0].length; x += 1) {
+        data = 0;
+        for (let coreY = 0; coreY < this.#coreMatrix.length; coreY += 1) {
+          for (let coreX = 0; coreX < this.#coreMatrix[0].length; coreX += 1) {
+            data += this.#rectMatrix[y + (0 - coreY)][x + (0 - coreX)]
+              * this.#coreMatrix[coreY][coreX];
+          }
+        }
+        this.#generateMatrix[countY][countX] = Math.round(data);
+        countX += 1;
+      }
+      countY += 1;
+    }
+    return this.#generateMatrix;
+  }
+
+  getConvArray() {
+    return this.generate().flat();
   }
 }
 

@@ -47,6 +47,19 @@ class Conversion {
     }
     this.#imageLayer.putImageData(this.#image, xPos, yPos);
   }
+
+  pixelsToImage(xPos, yPos, r, g, b, a) {
+    this.#createImageLayer();
+    let count = 0;
+    for (let i = 0; i < this.#image.data.length; i += 4) {
+      this.#image.data[i + 0] = r[count];
+      this.#image.data[i + 1] = g[count];
+      this.#image.data[i + 2] = b[count];
+      this.#image.data[i + 3] = a[count];
+      count += 1;
+    }
+    this.#imageLayer.putImageData(this.#image, xPos, yPos);
+  }
 }
 
 export default Conversion;

@@ -55,7 +55,7 @@ class Conversion {
       this.#image.data[i + 0] = r[count];
       this.#image.data[i + 1] = g[count];
       this.#image.data[i + 2] = b[count];
-      this.#image.data[i + 3] = a[count];
+      this.#image.data[i + 3] = 255;
       count += 1;
     }
     this.#imageLayer.putImageData(this.#image, xPos, yPos);

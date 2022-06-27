@@ -3,13 +3,53 @@ class Convolution {
 
   #generateMatrix = [];
 
-  #coreMatrix = [
-    [-1, 0, -1],
-    [0, 5, 0],
-    [-1, 0, -1],
+  #coreMatrixBlur = [
+    [0.0625, 0.125, 0.0625],
+    [0.125, 0.25, 0.125],
+    [0.0625, 0.125, 0.0625]
   ];
 
-  #outputMatrix = [];
+  #coreMatrixBottomSobel = [
+    [-1, -2, -1],
+    [0, 0, 0],
+    [1, 2, 1]
+  ];
+
+  #coreMatrixEmboss = [
+    [-2, -1, 0],
+    [-1, 1, 1],
+    [0, 1, 2]
+  ];
+
+  #coreMatrixLeftSobel = [
+    [1, 0, -1],
+    [2, 0, -2],
+    [1, 0, -1]
+  ];
+
+  #coreMatrixOutline = [
+    [-1, -1, -1],
+    [-1, 8, -1],
+    [-1, -1, -1]
+  ];
+
+  #coreMatrixRightSobel = [
+    [-1, 0, 1],
+    [-2, 0, 2],
+    [-1, 0, 1]
+  ];
+
+  #coreMatrixSharpen = [
+    [0, -1, 0],
+    [-1, 5, -1],
+    [0, -1, 0]
+  ];
+
+  #coreMatrixTopSobel = [
+    [1, 2, 1],
+    [2, 0, -2],
+    [-1, -2, -1]
+  ];
 
   constructor(layer, xSide, ySide) {
     this.layer = layer;
@@ -41,10 +81,10 @@ class Convolution {
       this.#generateMatrix[countY] = [];
       for (let x = 0; x < this.#rectMatrix[0].length; x += 1) {
         data = 0;
-        for (let coreY = 0; coreY < this.#coreMatrix.length; coreY += 1) {
-          for (let coreX = 0; coreX < this.#coreMatrix[0].length; coreX += 1) {
+        for (let coreY = 0; coreY < this.#coreMatrixOutline.length; coreY += 1) {
+          for (let coreX = 0; coreX < this.#coreMatrixOutline[0].length; coreX += 1) {
             data += this.#rectMatrix[y + (0 - coreY)][x + (0 - coreX)]
-              * this.#coreMatrix[coreY][coreX];
+              * this.#coreMatrixOutline[coreY][coreX];
           }
         }
         this.#generateMatrix[countY][countX] = Math.round(data);

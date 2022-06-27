@@ -4,7 +4,7 @@ import Convolution from './Convolution';
 import './style.css';
 
 const canvas = document.getElementById('canvas1');
-canvas.width = 1000;
+canvas.width = 500;
 canvas.heigth = 500;
 const ctx = canvas.getContext('2d');
 
